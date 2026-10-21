@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الصفحة الرئيسية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  @property --a { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+
+  :root {
+    --night: #12050a;
+    --wine: #3a0b1b;
+    --rose: #e8b4a0;
+    --rose-hi: #fbe3d6;
+    --gold: #d9a85b;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+    color: var(--rose-hi);
+    background:
+      radial-gradient(60vmax 60vmax at 80% -10%, rgba(138,28,58,.55), transparent 60%),
+      radial-gradient(50vmax 50vmax at 0% 110%, rgba(217,168,91,.18), transparent 60%),
+      var(--night);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow: hidden;
+  }
+
+  /* هالة ضوء ناعمة خلف الأزرار */
+  .glow {
+    position: fixed;
+    width: 520px; height: 520px;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(232,180,160,.22), transparent 65%);
+    filter: blur(30px);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  .stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    width: min(440px, 100%);
+    animation: rise 1.2s cubic-bezier(.2,.7,.2,1) both;
+  }
+
+  .btn {
+    --a: 0deg;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 30px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--rose-hi);
+    font-size: 1.3rem;
+    font-weight: 700;
+    background:
+      linear-gradient(var(--wine), var(--night)) padding-box,
+      conic-gradient(from var(--a), rgba(232,180,160,.15), var(--rose-hi) 12%, var(--gold) 22%, rgba(232,180,160,.15) 40%, rgba(232,180,160,.15) 60%, var(--gold) 80%, rgba(232,180,160,.15)) border-box;
+    border: 2px solid transparent;
+    box-shadow: 0 18px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(232,180,160,.06);
+    animation: spin 5s linear infinite;
+    transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease;
+  }
+  .btn:nth-child(2) { animation-duration: 7s; animation-direction: reverse; }
+  .btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 26px 70px rgba(0,0,0,.6), 0 0 60px rgba(217,168,91,.25);
+  }
+  .btn:focus-visible { outline: 2px solid var(--rose-hi); outline-offset: 6px; }
+
+  /* دائرة السهم */
+  .chev {
+    flex: none;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--rose-hi), var(--gold));
+    transition: transform .4s cubic-bezier(.2,.7,.2,1);
+  }
+  .chev svg { width: 18px; height: 18px; stroke: var(--night); fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .btn:hover .chev { transform: translateX(-6px); }
+
+  @keyframes spin { to { --a: 360deg; } }
+  @keyframes breathe { 50% { opacity: .55; transform: translate(-50%, -50%) scale(1.12); } }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn, .glow, .stack { animation: none; }
+    .btn, .chev { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <main class="stack">
+    <!-- ✏️ غيّر الرابط في href واسم الزر حسب ما تحب -->
+    <a class="btn" href="https://hucaro-wep.github.io/North-v4/" target="_blank" rel="noopener">
+      <span>الشرح والتدريب</span>
+      <span class="chev"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span>
+    </a>
+    <a class="btn" href="https://hucaro-wep.github.io/North-v8/" target="_blank" rel="noopener">
+      <span>الاستمارات</span>
+      <span class="chev"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span>
+    </a>
+  </main>
+</body>
+</html>
